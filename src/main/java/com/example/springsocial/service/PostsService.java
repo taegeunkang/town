@@ -26,6 +26,10 @@ public class PostsService {
         return postsRepository.getPostsWithCommentsCount();
     }
 
+    public List<Object[]> getPostsWithCommentsCountWithUserInfo() {
+        return postsRepository.getPostsWithCommentsCountWithUserInfo();
+    }
+
     public void deleteById(Long id) {
         postsRepository.deleteById(id);
     }

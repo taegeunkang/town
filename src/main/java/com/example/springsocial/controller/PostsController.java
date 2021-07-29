@@ -21,10 +21,10 @@ public class PostsController {
 
     @PostMapping("/post")
     public List<Object[]> getPosts() {
-
-        List<Object[]> tmp = postsService.getPostsWithCommentsCount();
-        tmp.forEach(objects -> System.out.println(Arrays.toString(objects)));
-        return postsService.getPostsWithCommentsCount();
+//
+//        List<Object[]> tmp = postsService.getPostsWithCommentsCount();
+//        tmp.forEach(objects -> System.out.println(Arrays.toString(objects)));
+        return postsService.getPostsWithCommentsCountWithUserInfo();
     }
     @GetMapping("/post/commentscount")
     public void getCommentsCount() {
@@ -36,13 +36,13 @@ public class PostsController {
         System.out.println(postDTO.getUser());
         System.out.println(postDTO.getContent());
         postsService.save(postDTO);
-        return postsService.getPostsWithCommentsCount();
+        return postsService.getPostsWithCommentsCountWithUserInfo();
     }
     @PostMapping("/post/delete")
-    public List<Object[]> deletePost(Long id){
+    public List<Object[]> deletePost(@RequestBody Long id){
         System.out.println(id);
         postsService.deleteById(id);
-        return postsService.getPostsWithCommentsCount();
+        return postsService.getPostsWithCommentsCountWithUserInfo();
     }
     @GetMapping("/comment/load")
     public List<Comment> getComments(@RequestParam Post post) {
