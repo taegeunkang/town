@@ -1,6 +1,7 @@
 package com.example.springsocial.service;
 
 import com.example.springsocial.domain.Comment;
+import com.example.springsocial.domain.Post;
 import com.example.springsocial.dto.CommentDTO;
 import com.example.springsocial.repository.CommentsRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,11 @@ public class CommetsService {
 
     public List<Comment> getcomments(Long id) {
         return commentsRepository.findByPostId(id);
+    }
+
+    public List<Object []> getComemntsWithUser(Long id) {
+        return commentsRepository.findByPostIdWithUser(id);
+
     }
 
 }

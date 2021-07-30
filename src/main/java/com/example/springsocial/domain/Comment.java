@@ -3,10 +3,12 @@ package com.example.springsocial.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+@Setter
 @Getter
 @Entity
 public class Comment extends BaseTimeEntity {
@@ -21,10 +23,14 @@ public class Comment extends BaseTimeEntity {
     @ManyToOne
     private Post post;
 
+    @ManyToOne
+    private User user;
+
     @Builder
-    private Comment(String content, Post post){
+    private Comment(String content, Post post, User user){
         this.content = content;
         this.post = post;
+        this.user = user;
     }
 
 }

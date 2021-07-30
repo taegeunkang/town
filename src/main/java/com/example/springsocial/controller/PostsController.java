@@ -9,7 +9,6 @@ import com.example.springsocial.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -39,22 +38,24 @@ public class PostsController {
         return postsService.getPostsWithCommentsCountWithUserInfo();
     }
     @PostMapping("/post/delete")
-    public List<Object[]> deletePost(@RequestBody Long id){
-        System.out.println(id);
-        postsService.deleteById(id);
+    public List<Object[]> deletePost(@RequestBody Post post){
+        System.out.println(post.getId());
+        postsService.deleteById(post.getId());
         return postsService.getPostsWithCommentsCountWithUserInfo();
     }
     @GetMapping("/comment/load")
-    public List<Comment> getComments(@RequestParam Post post) {
-        System.out.println(post.getId());
-        return commetsService.getcomments(post.getId());
+    public List<Object []> getComments(@RequestParam(value = "id") Long id) {
+        return commetsService.getComemntsWithUser(id);
     }
 
     @PostMapping("/comment/insert")
-    public List<Comment> setComments(CommentDTO commentDTO){
+    public List<Object []> setComments(@RequestBody CommentDTO commentDTO){
+        System.out.println("rrrrrrrrrrrrrrrrrrrr");
         System.out.println(commentDTO.getContent());
         commetsService.save(commentDTO);
-        return commetsService.getcomments(commentDTO.getPost().getId());
+        return commetsService.getComemntsWithUser(commentDTO.getPost());
 
     }
+
+
 }

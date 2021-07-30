@@ -10,21 +10,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class PostsRepositoryTest {
+class CommentsRepositoryTest {
+
     @Autowired
-    private PostsRepository postsRepository;
+    private CommentsRepository commentsRepository;
 
     @Test
-    public void 조회_테스트() {
-//
-//        List<Object[]> tmp = postsRepository.getPostsWithCommentsCountWithUserInfo();
-//       tmp.forEach(objects -> {
-//           System.out.println(Arrays.toString(objects));
-//       });
+    public void 조회테스트() {
+        List<Object []> lists = commentsRepository.findByPostIdWithUser(12L);
+        lists.forEach(objects -> {
+            System.out.println(Arrays.toString(objects));
+        });
     }
-
 
 }
