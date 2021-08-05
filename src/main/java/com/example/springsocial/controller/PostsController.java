@@ -3,6 +3,7 @@ package com.example.springsocial.controller;
 import com.example.springsocial.domain.Comment;
 import com.example.springsocial.domain.Post;
 import com.example.springsocial.dto.CommentDTO;
+import com.example.springsocial.dto.CommentWithPostDTO;
 import com.example.springsocial.dto.PostDTO;
 import com.example.springsocial.service.CommetsService;
 import com.example.springsocial.service.PostsService;
@@ -25,9 +26,10 @@ public class PostsController {
 //        tmp.forEach(objects -> System.out.println(Arrays.toString(objects)));
         return postsService.getPostsWithCommentsCountWithUserInfo();
     }
-    @GetMapping("/post/commentscount")
-    public void getCommentsCount() {
-
+    // 1개만 반환이므로 반환형 List<Object[]> 이거 바꿔야함
+    @GetMapping("/post/board")
+    public List<Object [] > getOnePost(@RequestParam(value = "id") Long id) {
+        return postsService.getPostWithUserInfo(id);
     }
 
     @PostMapping("/post/upload")
@@ -55,6 +57,10 @@ public class PostsController {
         commetsService.save(commentDTO);
         return commetsService.getComemntsWithUser(commentDTO.getPost());
 
+    }
+    @PostMapping("/comment/delete")
+    public List<Object[]> deleteComment(@RequestBody CommentWithPostDTO commentWithPostDTO){
+        return commetsService.deleteById(commentWithPostDTO.getCommentId(), commentWithPostDTO.getPostId());
     }
 
 

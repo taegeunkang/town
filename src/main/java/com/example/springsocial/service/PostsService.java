@@ -29,6 +29,10 @@ public class PostsService {
     public List<Object[]> getPostsWithCommentsCountWithUserInfo() {
         return postsRepository.getPostsWithCommentsCountWithUserInfo();
     }
+    // 1개만 반환이므로 반환형 List<Object[]> 이거 바꿔야함
+    public List<Object[]> getPostWithUserInfo(Long id) {
+        return postsRepository.getPostWithUserInfo(id);
+    }
 
     public void deleteById(Long id) {
         postsRepository.deleteById(id);

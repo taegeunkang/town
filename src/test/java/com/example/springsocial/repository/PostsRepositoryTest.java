@@ -19,11 +19,11 @@ class PostsRepositoryTest {
 
     @Test
     public void 조회_테스트() {
-//
-//        List<Object[]> tmp = postsRepository.getPostsWithCommentsCountWithUserInfo();
-//       tmp.forEach(objects -> {
-//           System.out.println(Arrays.toString(objects));
-//       });
+
+        List<Object[]> tmp = postsRepository.getPostWithUserInfo(16L);
+       tmp.forEach(objects -> {
+           System.out.println(Arrays.toString(objects));
+       });
     }
 
 

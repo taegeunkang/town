@@ -27,4 +27,9 @@ public class CommetsService {
 
     }
 
+    public List<Object []> deleteById(Long commentId, Long postId) {
+        commentsRepository.deleteById(commentId);
+        return commentsRepository.findByPostIdWithUser(postId);
+    }
+
 }
