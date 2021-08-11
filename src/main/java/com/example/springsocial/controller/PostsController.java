@@ -8,14 +8,20 @@ import com.example.springsocial.dto.PostTmpDTO;
 import com.example.springsocial.service.CommetsService;
 import com.example.springsocial.service.PostsService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController()
+@RestController
 public class PostsController {
 
     private final PostsService postsService;
@@ -32,6 +38,18 @@ public class PostsController {
     @GetMapping("/post/board")
     public List<Object [] > getOnePost(@RequestParam(value = "id") Long id) {
         return postsService.getPostWithUserInfo(id);
+    }
+
+    @GetMapping(value = "/image/{imagename}", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte []> getImage(@PathVariable("imagename") String imagename) throws IOException {
+        System.out.println("Image NAme is "+ imagename);
+        InputStream inputStream = new FileInputStream("/Users/deankang/postImg/user1/128/"+imagename);
+        byte[] imageToByteArray = IOUtils.toByteArray(inputStream);
+
+        System.out.println(imageToByteArray);
+        inputStream.close();
+        return new ResponseEntity<>(imageToByteArray, HttpStatus.OK);
+
     }
 
     @PostMapping("/post/upload")
