@@ -35,7 +35,7 @@ public class PostsService {
     public List<Object[]> getPostsWithCommentsCount() {
         return postsRepository.getPostsWithCommentsCount();
     }
-
+    //내용, 작성자, 댓글수 
     public List<Object[]> getPostsWithCommentsCountWithUserInfo() {
         return postsRepository.getPostsWithCommentsCountWithUserInfo();
     }
@@ -47,7 +47,7 @@ public class PostsService {
     public void deleteById(Long id) {
         postsRepository.deleteById(id);
     }
-
+    //게시글 내용 수정
     public int updatePost(Post post) {
         Optional<Post> post1 = postsRepository.findById(post.getId());
         post1.get().setContent(post.getContent());
@@ -55,6 +55,7 @@ public class PostsService {
         return 1;
     }
 
+    // 이미지 저장
     public void saveTest(PostTmpDTO postTmpDTO) throws IOException {
         Post post =postsRepository.save(postTmpDTO.toEntity());
         if(!postTmpDTO.getFiles().isEmpty()) {
