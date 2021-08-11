@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -36,5 +37,12 @@ public class PostsService {
 
     public void deleteById(Long id) {
         postsRepository.deleteById(id);
+    }
+
+    public int updatePost(Post post) {
+        Optional<Post> post1 = postsRepository.findById(post.getId());
+        post1.get().setContent(post.getContent());
+        postsRepository.save(post1.get());
+        return 1;
     }
 }

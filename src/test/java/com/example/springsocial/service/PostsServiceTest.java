@@ -1,12 +1,7 @@
-package com.example.springsocial.controller;
+package com.example.springsocial.service;
 
-import com.example.springsocial.domain.Comment;
 import com.example.springsocial.domain.Post;
-import com.example.springsocial.domain.User;
-import com.example.springsocial.dto.CommentDTO;
-import com.example.springsocial.repository.CommentsRepository;
 import com.example.springsocial.repository.PostsRepository;
-import com.example.springsocial.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +12,27 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class PostsControllerTest {
-
+class PostsServiceTest {
     @Autowired
-    private CommentsRepository commentsRepository;
+    private PostsService postsService;
 
     @Autowired
     private PostsRepository postsRepository;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @WithMockUser(value = "USER")
     @Test
     public void 테스트() {
+        Post post = new Post();
+        post.setId(29L);
+        post.setContent("수정 테스트");
 
+        int res = postsService.updatePost(post);
 
+        assertThat(res).isEqualTo(1);
 
     }
 

@@ -1,6 +1,5 @@
 package com.example.springsocial.controller;
 
-import com.example.springsocial.domain.Comment;
 import com.example.springsocial.domain.Post;
 import com.example.springsocial.dto.CommentDTO;
 import com.example.springsocial.dto.CommentWithPostDTO;
@@ -9,6 +8,7 @@ import com.example.springsocial.service.CommetsService;
 import com.example.springsocial.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,11 +39,23 @@ public class PostsController {
         postsService.save(postDTO);
         return postsService.getPostsWithCommentsCountWithUserInfo();
     }
+    @PostMapping("/post/upload/testfiles")
+    public void setPost1(@RequestBody List<MultipartFile> files) {
+        System.out.println("------------Test-----");
+        files.forEach(multipartFile -> System.out.println(multipartFile));
+
+
+    }
     @PostMapping("/post/delete")
     public List<Object[]> deletePost(@RequestBody Post post){
         System.out.println(post.getId());
         postsService.deleteById(post.getId());
         return postsService.getPostsWithCommentsCountWithUserInfo();
+    }
+
+    @PostMapping("/post/edit")
+    public int editPost(@RequestBody Post post) {
+        return postsService.updatePost(post);
     }
     @GetMapping("/comment/load")
     public List<Object []> getComments(@RequestParam(value = "id") Long id) {
