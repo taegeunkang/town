@@ -4,12 +4,14 @@ import com.example.springsocial.domain.Post;
 import com.example.springsocial.dto.CommentDTO;
 import com.example.springsocial.dto.CommentWithPostDTO;
 import com.example.springsocial.dto.PostDTO;
+import com.example.springsocial.dto.PostTmpDTO;
 import com.example.springsocial.service.CommetsService;
 import com.example.springsocial.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -40,10 +42,9 @@ public class PostsController {
         return postsService.getPostsWithCommentsCountWithUserInfo();
     }
     @PostMapping("/post/upload/testfiles")
-    public void setPost1(@RequestBody List<MultipartFile> files) {
+    public void setPost1(@ModelAttribute PostTmpDTO postTmpDTO) throws IOException {
         System.out.println("------------Test-----");
-        files.forEach(multipartFile -> System.out.println(multipartFile));
-
+        postsService.saveTest(postTmpDTO);
 
     }
     @PostMapping("/post/delete")
