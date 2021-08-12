@@ -63,7 +63,7 @@ public class PostsService {
             String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
             int cnt =0 ;
             for(MultipartFile file: postTmpDTO.getFiles()){
-                String filePath = rootPath+"/postImg/user"+postTmpDTO.getUser()+"/"+pId+"/img"+cnt;
+                String filePath = rootPath+"/postImg/"+pId+"/img"+cnt;
                 File dest = new File(filePath);
                 boolean res = false;
                 if(!dest.exists()) {

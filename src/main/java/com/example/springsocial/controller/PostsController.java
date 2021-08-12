@@ -40,10 +40,10 @@ public class PostsController {
         return postsService.getPostWithUserInfo(id);
     }
 
-    @GetMapping(value = "/image/{imagename}", produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<byte []> getImage(@PathVariable("imagename") String imagename) throws IOException {
+    @GetMapping(value = "/image/{postnumber}/{imagename}", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte []> getImage(@PathVariable("postnumber") String number,@PathVariable("imagename") String imagename) throws IOException {
         System.out.println("Image NAme is "+ imagename);
-        InputStream inputStream = new FileInputStream("/Users/deankang/postImg/user1/128/"+imagename);
+        InputStream inputStream = new FileInputStream("/Users/deankang/postImg/"+number+"/"+imagename);
         byte[] imageToByteArray = IOUtils.toByteArray(inputStream);
 
         System.out.println(imageToByteArray);
