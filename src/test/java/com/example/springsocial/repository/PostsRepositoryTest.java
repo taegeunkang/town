@@ -1,5 +1,6 @@
 package com.example.springsocial.repository;
 
+import com.example.springsocial.domain.Post;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,11 @@ class PostsRepositoryTest {
 
     @Test
     public void 페이징_테스트() {
-        Pageable p = PageRequest.of(0,20, Sort.unsorted());
-        List<Object[]> page = postsRepository.getPostsWithCommentsCountWithUserInfoByPaging(p);
-        page.forEach(objects -> {
-            System.out.println(Arrays.toString(objects));
-        });
+        Pageable p = PageRequest.of(2,3);
+       postsRepository.getPostsWithCommentsCountWithUserInfoByPaging(PageRequest.of(2,3))
+               .forEach(post -> System.out.println(Arrays.toString(post)));
+
+
 
     }
 
