@@ -58,7 +58,7 @@ public class PostsService {
     // 이미지 저장
     public void saveTest(PostTmpDTO postTmpDTO) throws IOException {
         Post post =postsRepository.save(postTmpDTO.toEntity());
-        if(!postTmpDTO.getFiles().isEmpty()) {
+        if(!postTmpDTO.filesEmpty()) {
             Long pId = post.getId();
             String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
             int cnt =0 ;
@@ -78,8 +78,30 @@ public class PostsService {
             }
 
 
+        }else{
+            return;
         }
 
 
+    }
+    //이미지 삭제
+    public void deleteImage(Long id)  {
+        Long count = imageRepository.countByPostId(id);
+        if(count > 0) {
+            String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+            String filePath = rootPath + "/postImg/" + id;
+            System.out.println("-------------파일삭제------------");
+            System.out.println(filePath);
+            File folder = new File(filePath);
+            int cnt = folder.listFiles().length;
+            if (cnt > 0) {
+                File[] files = folder.listFiles();
+                for (File file : files) {
+                    file.delete();
+                }
+            }
+            if(folder.exists())
+                folder.delete();
+        }
     }
 }

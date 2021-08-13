@@ -23,5 +23,8 @@ public class PostTmpDTO {
         usr.setId(user);
         return Post.builder().user(usr).content(content).build();
     }
+    public boolean filesEmpty() {
+        return files == null;
+    }
 
 }

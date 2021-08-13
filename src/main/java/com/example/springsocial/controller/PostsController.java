@@ -60,14 +60,15 @@ public class PostsController {
         return postsService.getPostsWithCommentsCountWithUserInfo();
     }
     @PostMapping("/post/upload/testfiles")
-    public void setPost1(@ModelAttribute PostTmpDTO postTmpDTO) throws IOException {
+    public List<Object[]> setPost1(@ModelAttribute PostTmpDTO postTmpDTO) throws IOException {
         System.out.println("------------Test-----");
         postsService.saveTest(postTmpDTO);
-
+        return postsService.getPostsWithCommentsCountWithUserInfo();
     }
     @PostMapping("/post/delete")
     public List<Object[]> deletePost(@RequestBody Post post){
         System.out.println(post.getId());
+        postsService.deleteImage(post.getId());
         postsService.deleteById(post.getId());
         return postsService.getPostsWithCommentsCountWithUserInfo();
     }
