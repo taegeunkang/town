@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Setter
 @Getter
@@ -37,6 +38,9 @@ public class User {
     private AuthProvider provider;
 
     private String providerId;
+
+
+
 
 
 }

@@ -7,6 +7,7 @@ import com.example.springsocial.dto.PostTmpDTO;
 import com.example.springsocial.repository.ImageRepository;
 import com.example.springsocial.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,18 +33,24 @@ public class PostsService {
         return postsRepository.findAll();
     }
 
-    public List<Object[]> getPostsWithCommentsCount() {
-        return postsRepository.getPostsWithCommentsCount();
-    }
-    //내용, 작성자, 댓글수 
+//    public List<Object[]> getPostsWithCommentsCount() {
+//        return postsRepository.getPostsWithCommentsCount();
+//    }
+    //게시글 전체 내용, 작성자, 댓글 갯수, 이미지 갯
     public List<Object[]> getPostsWithCommentsCountWithUserInfo() {
         return postsRepository.getPostsWithCommentsCountWithUserInfo();
+    }
+
+    //게시글 페이징 내용, 작성자, 댓글 수, 이미지 수수
+    public List<Object []> getPostsWithCommentsCountWithUserInfoByPaging(int pageNum){
+        return postsRepository.getPostsWithCommentsCountWithUserInfoByPaging(PageRequest.of(pageNum, 20));
     }
     // 1개만 반환이므로 반환형 List<Object[]> 이거 바꿔야함
     public List<Object[]> getPostWithUserInfo(Long id) {
         return postsRepository.getPostWithUserInfo(id);
     }
 
+    //게시글 삭제
     public void deleteById(Long id) {
         postsRepository.deleteById(id);
     }
