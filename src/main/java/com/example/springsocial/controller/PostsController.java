@@ -32,7 +32,12 @@ public class PostsController {
 
         return postsService.getPostsWithCommentsCountWithUserInfoByPaging(number);
     }
-    // 1개만 반환이므로 반환형 List<Object[]> 이거 바꿔야함
+    @PostMapping("/post")
+    public List<Object[]> getPosts() {
+
+        return postsService.getPostsWithCommentsCountWithUserInfo();
+    }
+
     @GetMapping("/post/board")
     public List<Object [] > getOnePost(@RequestParam(value = "id") Long id) {
         return postsService.getPostWithUserInfo(id);

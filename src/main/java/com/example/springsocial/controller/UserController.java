@@ -16,11 +16,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/hello")
-    public String getHello() {
-        System.out.println("say hi");
-        return "hello";
-    }
 
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
