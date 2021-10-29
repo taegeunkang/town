@@ -22,12 +22,6 @@ class PostsRepositoryTest {
         });
     }
 
-    @Test
-    public void 좋아요_테스트() {
-        postsRepository.searchPosts("http", PageRequest.of(1, 20)).forEach(objects -> {
-            System.out.println(objects);
-        });
-    }
 
 
 

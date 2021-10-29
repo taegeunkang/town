@@ -1,6 +1,8 @@
 package com.example.springsocial.repository;
 
 import com.example.springsocial.domain.User;
+import com.example.springsocial.dto.LikesDTO;
+import com.example.springsocial.dto.PostDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,14 @@ class LikesRepositoryTest {
     @Autowired
     private LikesRepository likesRepository;
 
-    @Test
-    public void 테스트트트() {
-       likesRepository.findPostsByUserId(1L).forEach(objects -> System.out.println(Arrays.toString(objects)));
-    }
+//    @Test
+//    public void 삭제테스트() {
+//        LikesDTO likesDTO;
+//        likesDTO = new LikesDTO(1L, 1L);
+//        System.out.println(likesDTO.getPost());
+//        System.out.println(likesDTO.getUser());
+//
+//        likesRepository.deleteByPostIdandUserId(likesDTO.getPost(), likesDTO.getUser());
+//    }
 
 }
